@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string-array name="phonetic_alphabets">
+        <item >Alpha</item>
+        <item >Bravo</item>
+        <item >Charlie</item>
+        <item >Delta</item>
+        <item >Echo</item>
+        <item >Foxtrot</item>
+        <item >Golf</item>
+        <item >Hotel</item>
+        <item >India</item>
+        <item >Juliet</item>
+        <item >Kilo</item>
+        <item >Lima</item>
+        <item >Mike</item>
+        <item >November</item>
+        <item >Oscar</item>
+        <item >Papa</item>
+        <item >Quebec</item>
+        <item >Romeo</item>
+        <item >Sierra</item>
+        <item >Tango</item>
+        <item >Uniform</item>
+        <item >Victor</item>
+        <item >Whiskey</item>
+        <item >XRay</item>
+        <item >Yankee</item>]
+        <item >Zulu</item>
+        
+
+    </string-array>
+    
+</resources>

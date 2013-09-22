@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SaveFragmentState</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_selections">Show selections</string>
+    <string name="dialog_selected_items">Selected Items</string>
+    <string name="ok">Ok</string>
+
+</resources>
