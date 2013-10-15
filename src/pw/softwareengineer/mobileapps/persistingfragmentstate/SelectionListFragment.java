@@ -3,12 +3,11 @@ package pw.softwareengineer.mobileapps.persistingfragmentstate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,15 +28,14 @@ public class SelectionListFragment extends ListFragment implements
 	private ListView mListView;
 	private List<CharSequence> selectedItems = new ArrayList<CharSequence>();
 	private ActionBarActivity parentActivity;
-	
+
 	private boolean dialogFragmentShown = false;
 
 	@Override
 	public void onAttach(Activity activity) {
+		Log.i(SelectionListFragment.class.getSimpleName(), "onAttach()");
 		super.onAttach(activity);
 		parentActivity = (ActionBarActivity) activity;
-		
-		System.out.println("onAttach()");
 	}
 
 	@Override
@@ -45,32 +43,33 @@ public class SelectionListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		setListAdapter(ArrayAdapter.createFromResource(parentActivity,
-				R.array.phonetic_alphabets,
-				R.layout.list_item));
-		
-		System.out.println("onCreate()");
-
+				R.array.phonetic_alphabets, R.layout.list_item));
+		Log.i(SelectionListFragment.class.getSimpleName(), "onCreate()");
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		System.out.println("onCreateView()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onCreateView()");
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-			if(dialogFragmentShown) {
-				showSelectedItems();
-			}
-		
+		// If a dialog fragment was being shown at the time the configuration change
+		// occurred, that dialog should
+		// be re-shown after the configuration change:
+		if (dialogFragmentShown) {
+			showSelectedItems();
+		}
+
 		mListView = getListView();
 		mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		mListView.setOnItemClickListener(this);
-		
-		System.out.println("onActivityCreated()");
 
+		Log.i(SelectionListFragment.class.getSimpleName(),
+				"onActivityCreated()");
 	}
 
 	@Override
@@ -100,13 +99,15 @@ public class SelectionListFragment extends ListFragment implements
 		CharSequence[] selectedItemsArray = new CharSequence[0];
 		selectedItemsArray = selectedItems.toArray(selectedItemsArray);
 		SelectedItemsDialogFragment dialogFragment = new SelectedItemsDialogFragment();
-		dialogFragment.setItems(selectedItemsArray);
+		Bundle args = new Bundle();
+		args.putCharSequenceArray(SelectedItemsDialogFragment.KEY_SELECTED_ITEMS, selectedItemsArray);
+		dialogFragment.setArguments(args);
 		dialogFragment.setRetainInstance(true);
 		dialogFragment.setTargetFragment(this, 0);
 		dialogFragment.show(parentActivity.getSupportFragmentManager(),
 				SelectedItemsDialogFragment.TAG_SELECTED_ITEMS_DIALOG);
 	}
-	
+
 	public void onDialogDismissedByUser() {
 		dialogFragmentShown = false;
 	}
@@ -122,48 +123,47 @@ public class SelectionListFragment extends ListFragment implements
 			selectedItems.remove(selectedItem);
 		}
 	}
-	
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
-		System.out.println("onStart()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onStart()");
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		System.out.println("onResume()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onResume()");
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		System.out.println("onPause()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onPause()");
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		System.out.println("onStop()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onStop()");
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		System.out.println("onDestroyView()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onDestroyView()");
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		System.out.println("onDestroy()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onDestroy()");
 	}
 
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		System.out.println("onDetach()");
+		Log.i(SelectionListFragment.class.getSimpleName(), "onDetach()");
 	}
 
 }

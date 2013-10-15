@@ -1,6 +1,5 @@
 package pw.softwareengineer.mobileapps.persistingfragmentstate;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,39 +9,49 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 	Fragment selectionListFragment;
-	private static final String fragmentName = "selection_list_fragment";// Key used to store selectionListFragment
-		// instance in the bundle during configuration changes.
+	private static final String fragmentName = "selection_list_fragment";// Key
+																			// used
+																			// to
+																			// store
+																			// the
+																			// reference
+																			// to
+																			// the
+																			// selectionListFragment
+
+	// instance in the bundle during a configuration change.
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (savedInstanceState != null) {
+			// #3:
 			selectionListFragment = fragmentManager.getFragment(
-					savedInstanceState, fragmentName);		
+					savedInstanceState, fragmentName);
 		}
 
 		if (selectionListFragment == null) {
 
 			selectionListFragment = new SelectionListFragment();
-			selectionListFragment.setRetainInstance(true);// To retain objects
-															// inside
-															// selectionListFragment
-															// like
-			// 'selectedItems' ArrayList etc. across configuration changes.
+			// #1:
+			selectionListFragment.setRetainInstance(true);// To retain the
+															// current instance
+															// of
+			// 'selectionListFragment' across Activity re-creation.
 		}
-
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
-		fragmentTransaction.replace(android.R.id.content, selectionListFragment);
+		fragmentTransaction
+				.replace(android.R.id.content, selectionListFragment);
 		fragmentTransaction.commit();
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {// Save the
-																// deletion list
-																// fragment
-																// along with
-		// with its checkbox states and checkedItemIds:
+																// reference to
+																// the
+		// current instance of 'selectionListFragment' to the bundle.
+		// #2:
 		getSupportFragmentManager().putFragment(savedInstanceState,
 				fragmentName, selectionListFragment);
 		super.onSaveInstanceState(savedInstanceState);

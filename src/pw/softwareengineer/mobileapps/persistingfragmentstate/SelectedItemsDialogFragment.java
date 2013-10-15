@@ -11,16 +11,12 @@ import android.support.v4.app.DialogFragment;
 
 public class SelectedItemsDialogFragment extends DialogFragment {
 	public static final String TAG_SELECTED_ITEMS_DIALOG = "selectedItemsDialog";
+	public static final String KEY_SELECTED_ITEMS = "selected_items";
 	private CharSequence[] items;
-//	public SelectedItemsDialogFragment(CharSequence[] items) {
-//		this.items = items;
-//	}
-	public void setItems(CharSequence[] items) {
-		this.items = items;
-	}
-
+	
 	@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+		items = getArguments().getCharSequenceArray(KEY_SELECTED_ITEMS);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.dialog_selected_items).setItems(items, null)
@@ -33,10 +29,4 @@ public class SelectedItemsDialogFragment extends DialogFragment {
         // Create the AlertDialog object and return it
         return builder.create();
     }
-	 @Override
-	 public void onDestroyView() {
-	     if (getDialog() != null && getRetainInstance())
-	         getDialog().setDismissMessage(null);
-	         super.onDestroyView();
-	 }
 }
